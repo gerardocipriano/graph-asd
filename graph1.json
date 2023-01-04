@@ -1,4 +1,4 @@
-{ "name":"graph1",
+﻿{ "name":"graph1",
   "n":6,
   "m":13,
   "isDirected" : true,
