@@ -23,8 +23,8 @@ def prim(graph, root):
             break
         expanded[u] = True
         # relax
-    for v, cost in graph.getAdjList(u):
-        if cost < dist[v] and not expanded[v]:
-            dist[v] = cost
-            pred[v] = u
+        for v, cost in graph.getAdjList(u):
+            if cost < dist[v] and not expanded[v]:
+                dist[v] = cost
+                pred[v] = u
     return dist, pred
