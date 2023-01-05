@@ -3,7 +3,7 @@ import json  # standard library no need to install
 
 
 import Graph  # weighted graph
-from prim import *
+from dijkstra import *
 
 import igraph as ig
 import matplotlib.pyplot as plt
@@ -33,7 +33,7 @@ if __name__ == "__main__":
     grid = [[0, 2], [2, 4], [2, 0], [4, 4], [4, 0], [6, 2]]
 
     G.printAdjlists()
-    print(prim(G, 0))
+    print(dijkstra(G, 0))
 
     fig, ax = plt.subplots()
     ig.plot(
