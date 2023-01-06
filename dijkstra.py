@@ -24,7 +24,8 @@ def dijkstra(graph, start, end):
                 path.append(current_node)
                 current_node = predecessors[current_node]
             return path[::-1]
-        for neighbor, weight in graph[current_node].items():
+        for neighbor, edge_attr in graph[current_node].items():
+            weight = edge_attr['weight']
             new_weight = current_weight + weight
             if new_weight < weights[neighbor]:
                 weights[neighbor] = new_weight

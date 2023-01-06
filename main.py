@@ -1,34 +1,32 @@
 import json
-import matplotlib.pyplot as plt
 import networkx as nx
-
+import matplotlib.pyplot as plt
 from dijkstra import *
 
-# Load the graph data from the JSON file
+# Lettura del grafo da file JSON
+
 with open('graph1.json', encoding='utf-8-sig') as f:
     data = json.load(f)
 
-# Creazione del grafo con Network X
+# Creazione del grafo
 G = nx.DiGraph()
-
-
 for node in data['nodes']:
-    G.add_node(node['id'])
+    G.add_node(node['id'], label=node['label'])
 for arc in data['arcs']:
     G.add_edge(arc['end1'], arc['end2'], weight=arc['weight'])
-##############################################################
 
-# Creazione del grafo da analizzare con Dijkstra
-graph = {}
-for node in data['nodes']:
-    graph[node['id']] = {}
-for arc in data['arcs']:
-    graph[arc['end1']][arc['end2']] = arc['weight']
+# Esecuzione dell'algoritmo di Dijkstra
+path = dijkstra(G, 0, 5)
+print(path)
 
+# Disegno del grafo
+pos = nx.spring_layout(G)
+nx.draw(G, pos=pos, with_labels=True)
 
-shortest_path = dijkstra(graph, 0, 5)
-print(shortest_path)
+# Creazione del percorso ottenuto con l'algoritmo di Dijkstra
+path_edges = [(path[i], path[i+1]) for i in range(len(path)-1)]
 
-# Plotting del grafo con networkx e matplot
-nx.draw(G, with_labels=True)
+# Disegno del percorso
+nx.draw_networkx_edges(G, pos=pos, edgelist=path_edges, width=8, edge_color='r')
+
 plt.show()
